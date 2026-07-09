@@ -1,0 +1,8 @@
+<svg width="330" height="165" viewBox="0 0 330 165" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Top languages placeholder">
+  <rect x="0.5" y="0.5" width="329" height="164" rx="10" fill="none" stroke="#C9A227" stroke-opacity="0.35"/>
+  <text x="25" y="42" font-family="'Segoe UI',Verdana,sans-serif" font-size="18" font-weight="600" fill="#C9A227">Most Used Languages</text>
+  <line x1="25" y1="58" x2="305" y2="58" stroke="#C9A227" stroke-opacity="0.25"/>
+  <text x="25" y="92" font-family="'Segoe UI',Verdana,sans-serif" font-size="13" fill="#C9D1D9">PHP · Solidity · TypeScript · Python</text>
+  <text x="25" y="120" font-family="'Segoe UI',Verdana,sans-serif" font-size="13" fill="#8B949E">Live breakdown appears after the first</text>
+  <text x="25" y="138" font-family="'Segoe UI',Verdana,sans-serif" font-size="13" fill="#8B949E">workflow run.</text>
+</svg>

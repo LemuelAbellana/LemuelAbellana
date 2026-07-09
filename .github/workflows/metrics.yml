@@ -1,0 +1,52 @@
+name: Generate stats SVGs
+
+# Fetches themed stat cards once a day and commits them into assets/ so the
+# README never hotlinks the rate-limited Vercel endpoints directly.
+on:
+  schedule:
+    # Run once daily at 00:00 UTC.
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Fetch the three cards into TEMP files first, then move into place only on
+      # success. This guarantees a transient Vercel/demolab outage never truncates
+      # or overwrites a previously-committed good SVG (curl -o truncates the target
+      # the instant it opens it, so we must never point it straight at the asset).
+      - name: Fetch stat SVGs
+        run: |
+          mkdir -p assets
+          fetch() {
+            # $1 = url, $2 = destination asset path
+            if curl --fail --silent --show-error --location "$1" -o "$2.tmp"; then
+              mv "$2.tmp" "$2"
+              echo "updated $2"
+            else
+              rm -f "$2.tmp"
+              echo "fetch failed — keeping existing $2"
+            fi
+          }
+          fetch "https://github-readme-stats.vercel.app/api?username=LemuelAbellana&show_icons=true&rank_icon=github&include_all_commits=true&count_private=true&title_color=C9A227&icon_color=C9A227&text_color=C9D1D9&bg_color=00000000&hide_border=true" assets/stats.svg
+          fetch "https://github-readme-stats.vercel.app/api/top-langs/?username=LemuelAbellana&layout=compact&langs_count=8&title_color=C9A227&text_color=C9D1D9&bg_color=00000000&hide_border=true" assets/top-langs.svg
+          fetch "https://streak-stats.demolab.com/?user=LemuelAbellana&theme=transparent&ring=C9A227&fire=C9A227&currStreakLabel=C9A227&sideLabels=C9D1D9&currStreakNum=C9D1D9&sideNums=C9D1D9&dates=C9D1D9&background=00000000&border=00000000&hide_border=true" assets/streak.svg
+
+      # Commits only if any SVG actually changed. The built-in GITHUB_TOKEN
+      # (granted via permissions: contents: write above) is all that is needed.
+      #
+      # NOTE: An optional PAT secret (e.g. GH_TOKEN) is ONLY required if you later
+      # self-host github-readme-stats to count private contributions — the public
+      # instance ignores private data regardless of token, so none is inlined here.
+      - name: Commit refreshed SVGs
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: refresh stats SVGs [skip ci]"
+          file_pattern: "assets/*.svg"
