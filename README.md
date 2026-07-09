@@ -46,7 +46,9 @@ IT student and developer researcher at the University of the Immaculate Concepti
 
 **Backend & Web:**
 
-<img src="https://skillicons.dev/icons?i=laravel,php,livewire,inertia,react,nextjs,ts,tailwind,django,py&theme=dark&perline=10" alt="Backend & Web" />
+<img src="https://skillicons.dev/icons?i=laravel,php,react,nextjs,ts,tailwind,django,py&theme=dark&perline=10" alt="Backend & Web" />
+<img src="https://img.shields.io/badge/Livewire-C9A227?style=flat&logo=livewire&logoColor=0B1F3A" alt="Livewire" />
+<img src="https://img.shields.io/badge/Inertia.js-C9A227?style=flat&logo=inertia&logoColor=0B1F3A" alt="Inertia.js" />
 
 **Blockchain:**
 
