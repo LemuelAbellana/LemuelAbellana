@@ -24,8 +24,8 @@ jobs:
         with:
           github_user_name: ${{ github.repository_owner }}
           outputs: |
-            dist/github-contribution-grid-snake.svg?color_snake=0B1F3A&color_dots=ebedf0,d4bb5e,C9A227,a8811d,7a5e14
-            dist/github-contribution-grid-snake-dark.svg?color_snake=C9A227&color_dots=161b22,5c4a12,997d1a,b8941f,C9A227
+            dist/github-contribution-grid-snake.svg?color_snake=%230B1F3A&color_dots=%23ebedf0,%23d4bb5e,%23C9A227,%23a8811d,%237a5e14
+            dist/github-contribution-grid-snake-dark.svg?color_snake=%23C9A227&color_dots=%23161b22,%235c4a12,%23997d1a,%23b8941f,%23C9A227
 
       # Push dist/ to the `output` branch. This MUST match the README's snake path
       # (.../output/github-contribution-grid-snake.svg).
